@@ -11,7 +11,6 @@ $menu_id = (int) $_POST['menu_id'];
 $jumlah  = (int) $_POST['jumlah_menu_dipilih'];
 $harga   = (int) $_POST['harga_menu'];
 
-/* 1. INSERT TRANSACTION */
 mysqli_query($conn, "
     INSERT INTO `Transaction` (Waktu, Metode_Pembayaran)
     VALUES ('$waktu', '$metode')
@@ -19,7 +18,6 @@ mysqli_query($conn, "
 
 $transaction_id = mysqli_insert_id($conn);
 
-/* 2. INSERT DETAIL TRANSACTION */
 mysqli_query($conn, "
     INSERT INTO Detail_Transaction (
         Jumlah_Menu_Dipilih,
@@ -34,14 +32,12 @@ mysqli_query($conn, "
     )
 ");
 
-/* 3. AMBIL RESEP */
 $resep = mysqli_query($conn, "
     SELECT Data_Bahan_ID, Jumlah_Pakai
     FROM Recipe
     WHERE Menu_ID = $menu_id
 ");
 
-/* 4. KURANGI STOK (AMAN) */
 while ($row = mysqli_fetch_assoc($resep)) {
 
     $bahan_id = (int) $row['Data_Bahan_ID'];
