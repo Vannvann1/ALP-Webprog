@@ -64,7 +64,7 @@
       $result = mysqli_query($conn, "SELECT COUNT(*) as total FROM Menu");
       $total_produk = mysqli_fetch_assoc($result)['total'];
 
-      $result = mysqli_query($conn, "SELECT SUM(Jumlah * Harga) as total FROM Detail_Pembelian");
+      $result = mysqli_query($conn, "SELECT SUM(Harga) as total FROM Detail_Pembelian");
       $total_pembelian = mysqli_fetch_assoc($result)['total'] ?? 0;
 
       $result = mysqli_query($conn, "SELECT SUM(Jumlah_Menu_Dipilih * Harga_Menu) as total FROM Detail_Transaction");
